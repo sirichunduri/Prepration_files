@@ -1,0 +1,64 @@
+range() VS xrange() :
+
+		Return Type :
+
+range() returns – the list as return type.
+xrange() returns – xrange() object.
+
+		Memory:
+
+The variable storing the range created by range() takes more memory as compared to variable storing the range using xrange(). The basic reason for this is the return type of range() is list and xrange() is xrange() object.
+
+		Operations usage:
+		
+As range() returns the list, all the operations that can be applied on the list can be used on it. On the other hand, as xrange() returns the xrange object, operations associated to list cannot be applied on them, hence a disadvantage.
+		
+		Speed:
+		
+Because of the fact that xrange() evaluates only the generator object containing only the values that are required by lazy evaluation, therefore is faster in implementation than range().
+
+
+A static method does not receive an implicit first argument.
+
+
+Timsort is a hybrid sorting algorithm, derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data. It was invented by Tim Peters in 2002 for use in the Python programming language. The algorithm finds subsets of the data that are already ordered, and uses the subsets to sort the data more efficiently. This is done by merging an identified subset, called a run, with existing runs until certain criteria are fulfilled. Timsort has been Python's standard sorting algorithm since version 2.3. It is now also used to sort arrays in Java SE 7, and on the Android platform.
+
+
+Python threading is restricted to a single CPU. The multiprocessing library will allow you to run code on different processors.
+
+    x = threading.Thread(target=thread_function, args=(1,)) --------- args: the arguments to be passed to the target function
+	x.start()
+	x.join()
+
+thread.join() ------ wait until another threads are finished. Effective for demon threads. A daemon is a process that runs in the background.
+
+
+
+A race condition is when two threads accessing a data at same time and trying to change data at same time in resource. Which results in data lost. 
+
+to avoid race condition Lock and Rlock are implemented. Rlock is slower compared to Lock. 
+
+
+threading.Lock ------- allows one thread to access a resource. 
+threading.aquire -------- to aquire the thread.
+threading.release -------- to release the aquired thread.
+
+Sometimes before releasing thread, if it aquries again, it results in deadlock situation and as a result program gets stuck.
+
+to avoid above situation python has Rlock, in which aquire can be called n number of times and then release should be called same n number of times to realse the thread lock.
+
+
+
+ThreadPoolExecutor:  To manage threads as a context manager, takes care of starting and waiting for each thread in pool to complete. It does not prevent race conditions.
+
+
+A semaphore manages an internal counter(default value 1) which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some other thread calls release().
+
+Timer threads: timer can be started using thread.start and can be cancelled using thread.cancel
+
+Barrier: Threading.barrier, sets a limit to threads. Until the limit is reached all threads will .wait(), after the barrier  limit got reached all threads will be realsed once. 
+
+
+
+links:
+https://rubular.com/r/rAWmIy4Xeh

@@ -1,0 +1,168 @@
+﻿
+django-admin startproject mysite
+
+mysite/
+	manage.py
+	mysite/
+		__init__.py ------------------ ( just to tell it is a Python module)
+		settings.py
+		urls.py
+		wsgi.py
+		
+Templates search default by "DIRS" path mentioned in settings.py file, if not found checks recursively untill it is found. default path can be modified by changing in settings.py file
+
+python manage.py startapp blog
+
+blog/
+	__init__.py
+	admin.py
+	apps.py
+	migrations/
+		__init__.py
+	models.py
+	tests.py
+	views.py
+	
+	To call the view, we need to map it to a URL - and for this we need a urls.py
+
+MODELS:
+	
+python manage.py migrate
+	
+The migrate command will only run migrations for apps in INSTALLED_APPS.
+
+models.py ---- Follows Dry Principle(means reduce redundancy)
+
+A model is the single, definitive source of truth about your data. It contains the essential fields and behaviors of
+the data you’re storing
+
+
+Run python manage.py makemigrations to create migrations for those changes
+
+
+It’s important to add __str__() methods to your models, for own convenience when dealing with the
+interactive prompt and as objects’ representations are used throughout Django
+Run python manage.py migrate to apply those changes to the database.
+
+VIEWS:
+
+Each view is responsible for doing one of two things: returning an HttpResponse object containing the content for
+the requested page, or raising an exception such as Http404.
+
+
+TEMPLATES:
+
+
+Your project’s TEMPLATES setting describes how Django will load and render templates. The default settings
+file configures a DjangoTemplates backend whose APP_DIRS option is set to True. By convention
+DjangoTemplates looks for a “templates” subdirectory in each of the INSTALLED_APPS.
+
+
+Template namespacing:
+
+Now we might be able to get away with putting our templates directly in blog/templates (rather than creating
+another blog subdirectory), but it would actually be a bad idea. Django will choose the first template it finds whose
+name matches, and if you had a template with the same name in a different application, Django would be unable to
+distinguish between them. We need to be able to point Django at the right one, and the easiest way to ensure this is by
+namespacing them. That is, by putting those templates inside another directory named for the application itself.
+
+
+Render():
+
+The render() function takes the request object as its first argument, a template name as its second argument and a
+dictionary as its optional third argument. It returns an HttpResponse object of the given template rendered with
+the given context.
+
+
+
+Always return an HttpResponseRedirect after successfully dealing with POST data. This prevents data from being posted twice if a user hits the Back button.
+
+
+
+Use generic views: Less code is better
+
+Each generic view needs to know what model it will be acting upon. This is provided using the model attribute.
+The DetailView generic view expects the primary key value captured from the URL to be called "pk"
+
+
+
+Django Testing:
+
+test-driven development
+
+from django.test import TestCase
+
+class QuestionModelTests(TestCase):
+def test_was_published_recently_with_future_question(self):
+
+time = timezone.now() + datetime.timedelta(days=30)
+future_question = Question(pub_date=time)
+self.assertIs(future_question.was_published_recently(), False)
+
+
+Django provides a test Client to simulate a user interacting with the code at the view level. 
+
+
+
+There are three styles of inheritance that are possible in Django.
+1. Often, you will just want to use the parent class to hold information that you don’t want to have to type out for
+each child model. This class isn’t going to ever be used in isolation, so Abstract base classes are what you’re
+after.
+2. If you’re subclassing an existing model (perhaps something from another application entirely) and want each
+model to have its own database table, Multi-table inheritance is the way to go.
+3. Finally, if you only want to modify the Python-level behavior of a model, without changing the models fields in
+any way, you can use Proxy models.
+
+
+Base class restrictions:
+
+A proxy model must inherit from exactly one non-abstract model class. You can’t inherit from multiple non-abstract
+models as the proxy model doesn’t provide any connection between the rows in the different database tables. A proxy
+model can inherit from any number of abstract model classes, providing they do not define any model fields. A proxy
+model may also inherit from any number of proxy models that share a common non-abstract parent class.
+
+
+https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
+
+Signals:
+
+There are two key elements in the signals machinary: the senders and the receivers. 
+
+A receiver must be a function or an instance method which is to receive signals.
+
+A sender must either be a Python object, or None to receive events from any sender.
+
+The connection between the senders and the receivers is done through “signal dispatchers”, which are instances of Signal, via the connect method.
+
+To receive a signal, you need to register a receiver function that gets called when the signal is sent by using the Signal.connect() method.
+
+Django’s cache framework:
+
+Memcached:
+
+The fastest, most efficient type of cache supported natively by Django, Memcached is an entirely memory-based cache server, originally developed to handle high loads at LiveJournal.com and subsequently open-sourced by Danga Interactive. It is used by sites such as Facebook and Wikipedia to reduce database access and dramatically increase site performance.
+
+Database caching:
+
+Django can store its cached data in your database. This works best if you’ve got a fast, well-indexed database server.
+
+Local-memory caching:
+
+This is the default cache if another is not specified in your settings file.
+
+Dummy caching (for development):
+
+Finally, Django comes with a “dummy” cache that doesn’t actually cache – it just implements the cache interface without doing anything.
+
+
+https://medium.com/python-pandemonium/json-web-token-based-authentication-in-django-b6dcfa42a332
+
+
+
+A Q() object, like an F object, encapsulates a SQL expression in a Python object that can be used in database-related operations.
+
+In general, Q() objects make it possible to define and reuse conditions. This permits the construction of complex database queries using | (OR) and & (AND) operators; in particular, it is not otherwise possible to use OR in QuerySets.
+
+
+An F() object represents the value of a model field or annotated column. It makes it possible to refer to model field values and perform database operations using them without actually having to pull them out of the database into Python memory.
+

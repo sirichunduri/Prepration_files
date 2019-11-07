@@ -1,0 +1,73 @@
+/**************************** PYTHON ****************************/
+list vs tuple
+xrange vs range
+shallowcopy vs deep copy
+str vs repr
+Decorators,1st class functions,closures
+Regular Expressions
+Threading
+Args,Kwargs
+virtual env
+else with for
+itertools(accumulate,chain,dropwhile,filterfalse,any,all)
+lambda,map,filter,reduce
+Generators
+python 2 vs 3
+call by value & refrence
+exception handling
+Debugging Pycharm
+excel and csv reports(xlwt & csv libraries)
+
+/**************************** Javascript ****************************/
+
+let vs const
+
+/**************************** HTML,CSS,Bootstrap ****************************/
+div
+container
+element
+attributes
+
+
+/**************************** Django ****************************/
+Middileware
+settings.py whole description
+commands to start new prjct and app
+User grup Permissions
+signals
+HttpResponses
+Sessions and types
+cookies and cache types
+serverside Pagination(Datatables)
+
+/**************************** Ajax and Json ****************************/
+
+Basic syntax
+
+/**************************** RestAPI ****************************/
+routers
+viewsets
+generic views
+
+/**************************** SQL ****************************/
+
+Basic commands
+Triggers
+DB indexing
+
+/**************************** Jenkins ****************************/
+
+
+
+/**************************** Git Hub & Clearcase ****************************/
+stash
+ssh-keygen
+commands basic
+
+/**************************** Linux Unix Shell Scripting ****************************/
+awk
+sed
+grep
+cut
+chmod
+other commands
