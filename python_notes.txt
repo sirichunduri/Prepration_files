@@ -58,7 +58,36 @@ Timer threads: timer can be started using thread.start and can be cancelled usin
 
 Barrier: Threading.barrier, sets a limit to threads. Until the limit is reached all threads will .wait(), after the barrier  limit got reached all threads will be realsed once. 
 
+#Writing to excel
 
+import xlwt 
+from xlwt import Workbook 
+  
+# Workbook is created 
+wb = Workbook() 
+  
+# add_sheet is used to create sheet. 
+sheet1 = wb.add_sheet('Sheet 1') 
+  
+sheet1.write(1, 0, 'ISBT DEHRADUN') 
+sheet1.write(2, 0, 'SHASTRADHARA') 
+sheet1.write(0, 1, 'ISBT DEHRADUN') 
+sheet1.write(0, 2, 'SHASTRADHARA') 
+  
+wb.save('xlwt example.xls') 
+
+#Writing to csv
+
+import csv
+
+with open('names.csv', 'w', newline='') as csvfile:
+    fieldnames = ['first_name', 'last_name']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
 
 links:
 https://rubular.com/r/rAWmIy4Xeh
