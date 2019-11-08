@@ -1,0 +1,29 @@
+Install Java Version 8 – Jenkins is a Java based application, hence Java is a must.
+
+Install Apache Tomcat Version 9 – Tomcat is essential to deploy Jenkins war file.
+
+Download Jenkins war File – This war is must to install Jenkins.
+
+Deploy Jenkins war File – You deploy Jenkins war file using Tomcat to run Jenkins.
+
+Install Suggested Plugins – Install a list of plugins suggested by Jenkins.
+
+Running Jenkins war file as 
+
+java -jar /opt/apache-tomcat-7.0.54/webapps/jenkins.war --httpPort=8085
+
+Maven is a build management tool. It uses a simple pom.xml to configure all the dependencies needed to build, test and run the code. Maven manages the full lifecycle of a test project. Once integrated with Jenkins, the maven Webdriver will build the project and execute all tests efficiently.
+
+Sunny, more than 80% of Runs passing
+	
+Partially Sunny, 61% to 80% of Runs passing
+	
+Cloudy, 41% to 60% of Runs passing
+Raining, 21% to 40% of Runs passing
+Storm, less than 21% of Runs passing
+
+Blue --- In progress
+green-- passed
+yellow '!' --- Unstable
+red 'X' ------ Failed
+grey '-' ----- Aborted 
