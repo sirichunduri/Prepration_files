@@ -1,0 +1,99 @@
+What is your Role in your Project:
+
+“I am working with a 15 person team in healthcare domain to develop a website for a hospital inorder to maintain doctors and patients records, as well as services provided by a hospital".
+
+My main role was backend development with Python, Django, MySQL, and sometimes I collaborated on some specific frontend modules when needed, since I know some Javascript and HTML.
+
+In Previous project, I worked on Linux and Unix servers and integrated our project with Jenkins in order to support continous integration.
+
+
+Why do you choose Python:
+
+In our previous project, we worked on scripting mainly and when I used Python I liked it because of its clear syntax, well structured modules and packages. This does'nt mean that am inclined only to python. I would like to learn and work on any language. Currently am (learning/becomming stronger in) datastructures and algorithms as these are base to any language.
+
+Why should I hire you:
+
+After providing dedicated service of nearly 4.5 years to TCS, I am ready to accept the new challenge and showcase the same dedication if given the opportunity.  I would be a good employee to the company as in TCS I have recieved awards like employee of quater, star of MBR, for my Top Performance. And I would be adaptable and Confident in any situation.
+
+Why do you want to work for this company?
+
+I have seen the BOA Organization’s growth curve and Employee Satisfaction levels and also work life balance culture. I am trying to prove my calibre biggest platforms that suits my profile. So it would be a great chance for me to work in BOA.
+
+What is your work style?
+
+Currently in TCS, we are working in agile methodology, where in the requiremnt may change at any time and deadlines will not be moved. I could say am adjustable to situations with challenging and changing environment with lot of pressure and delivering the product on time. 
+
+What are your career goals?
+
+Currently am working as a developer, in future I would like to develop a project more in architecture level, and along with coding I would like to develop my managing skills by leading a team. 
+
+Why are you looking to change jobs?
+
+I would like to widen my horizons, add more dimensions to my work front and prove myself capable of accepting a new challenge. I want to raise the standards of improved designation, job profile and become financially more proficient.
+
+
+
+Most challenging: Continous Integration using Jenkins, because we don't have any knowledge on it before hand. but completed it on time.
+
+What you learned: Team work, team spirit, if some problem occurs even though you don't know how to fix it, be available there, don't skip it. It would be solved.
+
+Most Interesting: new tasks would be interesting, 
+
+Hardest Bug: I would'nt say bug as hardest, but time limit given to a bug makes it harder.. sometimes we need to send hot fixes like end of the day. We used to work as a team to deliver it on time.
+
+
+Enjoyed most: Project approvals, something we delivered and if it is bug free.. I would enjoy the most.
+
+
+Conflicts with teammates: Yes, it would happen as the understanding ability of no two persons is same. Sometimes i might go wrong, sometimes others go wrong. We use to discuss by checking required documents, and consulting other team members. This would end any conflicts.
+
+
+
+
+
+
+
+
+Design Patterns Python:
+
+Simple is better than complex! Don’t Repeat Yourself (DRY) and never write code lines longer than 80 characters!!!
+
+Two main principles are in the bases of the design patterns defined by the GOF:
+
+Program to an interface not an implementation.
+Favor object composition over inheritance.
+
+Behavioral Patterns:
+
+	iterator,Generators.
+	chain of responsibility :Every piece of code must do one, and only one, thing.
+	command: The command pattern is handy in situations when, for some reason, we need to start by preparing what will be executed and then to execute it when needed.
+
+Creational Patterns :
+
+	singleton: we want to guarantee that only one instance of a given class exists during runtime
+	dependency injection: Django authorization
+	
+Structural Patterns:
+
+	facade: Imagine you have a system with a considerable number of objects. Every object is offering a rich set of API methods. You can do a lot of things with this system, but how about simplifying the interface? Why not add an interface object exposing a well thought-out subset of all API methods? A Facade!
+	adapter: Adapting a function to other scenario(sending cow, but expecting Duck)
+	decorator:
+	
+	
+DataBase Design:
+		
+		1.Determine the purpose of the database
+		2.Find and organize the information required
+		3.Divide the information into tables
+		4.Turn information items into columns
+		5.Specify primary keys
+		6.Set up the table relationships 
+		7.Refine the design
+		8.Refine the design
+
+Normalization:		
+
+In the field of relational database design, normalization is a systematic way of ensuring that a database structure is suitable for general-purpose querying and free of certain undesirable characteristics—insertion, update, and deletion anomalies that could lead to loss of data integrity.
+
+The more normalized the design is, the less data redundancy, it takes up less space to store
