@@ -1,47 +1,69 @@
 import mysql.connector
 import csv
 db = mysql.connector.connect(host="localhost",user="siri",passwd="")
-mycursor=db.cursor()
-L=["AAPL","BAC","DIS","FB","INTC","JNJ","JPM","MSFT","TSLA","V"]
-mycursor.execute("insert into portfolio Date,A,B,C,D values "2015-01-01","100","100","100","100")
-for i in L:
-	with open(i+".csv",newline='') as csvfile:
-		data = csv.reader(csvfile)
-		for row in data:
-			date,stock_price=str(row).split('|')
-			sql="insert into gridlex (Date, %s) values (%s, %s))"
-			val = (i,date,stock_price)
-			mycursor.execute(sql,val)
-mycursor.execute("alter table gridlex order by Date ASC;")
+mycursor = db.cursor()
+L = ["AAPL","BAC","DIS","FB","INTC","JNJ","JPM","MSFT","TSLA","V"] # List of given tickers
+mycursor.execute("insert into portfolio Date,A,B,C,D values '2015-01-01','100','100','100','100'") # Initial 100 investment on jan 1st 2015
+for i in L: #adding all the csv files data into database with date as primary key and default value of tickers as null
+	x = str(i)+".csv"
+	f = open(x)
+	data = csv.reader(f)
+	for row in data:
+		date,stock_price=str(row).split('|')
+		mycursor.execute("if exists (select * from gridlex where Date=%s) "
+						 "BEGIN update into gridlex (Date, %s) values (%s, %s) end else begin insert into gridlex (Date, %s) values (%s, %s) end",
+						 (date,i, date,stock_price,i, date,stock_price))
+
+mycursor.execute("alter table gridlex order by Date ASC;") # Alterning the table with date in ascending order
 db.commit()
 mycursor.execute("select Date from gridlex")
-datelist=[]
+datelist = [] #list with all the dates
 for row in mycursor:
 	datelist.append(row)
-den={}
-num={}
-inventment={}
+den = {} #creating dictonary of previous date to find stock returns
+num = {} #creating dictonary of current date to find stock returns
 for i in range(2,len(datelist)):
 	mycursor.execute("select * from gridlex where Date=%s",datelist[i-1])
-	den[row[0]]=row[1] for row in mycursor.fetchall()
+	res=[]
+	for a in mycursor.fetchall():
+		res.append(a)
+	for k,x in zip(L,res):
+		den[k] = x
 	mycursor.execute("select * from gridlex where Date=%s",datelist[i])
-	num[row[0]]=row[1] for row in mycursor.fetchall()
+	res = []
+	for b in mycursor.fetchall():
+		res.append(b)
+	for k,x in zip(L,res):
+		num[k] = x
 	stockreturn=[]
 	for j in L:
-		if den[j] and num[j]:
+		if den.get(j) and num.get(j):
 			returns=(num[j]-den[j])/den[j]
-			#stockreturn.append({i:returns})
 			stockreturn.append(returns)
-	#stockreturn=sorted(stockreturn,key=lambda kv:kv['returns'])
-	stockreturn.sort()
-	if len(stockreturn)>7:
-		pass
-	else:
+	stockreturn.sort(reverse=True) #sort the stock price in decsending order
+	if len(stockreturn)>7: #if stock price values length is greater than 7 adding 2 part values
 		mycursor.execute("select * from portfolio where Date=%s",datelist[i-1])
-		inventment[row[0]]=row[1] for row in mycursor.fetchall()
-		res=(inventment[i],(int(inventment["A"])+int(stockreturn[0]),(int(inventment["B"])+int(stockreturn[1]),(int(inventment["A"])+int(stockreturn[2]),(int(inventment["A"])+int(stockreturn[3]))
-		mycursor.execute("insert into portfolio Date,A,B,C,D values (%s, %s,%s, %s,%s)",res)
-		
-		
-		
-	
+		res = []
+		inventment = {}
+		for c in mycursor.fetchall():
+			res.append(c)
+		for k, x in zip(L, res):
+			inventment[k] = x
+		res = (datelist[i], (int(inventment["A"])) + int(stockreturn[0])+ int(stockreturn[1]), (int(inventment["B"])) + int(stockreturn[2])+ int(stockreturn[3]),
+			   (int(inventment["A"])) + int(stockreturn[4]+ int(stockreturn[5])), (int(inventment["A"])) + int(stockreturn[6])+ int(stockreturn[7]))
+		sql = "insert into  (Date,A,B,C,D) values (%s,%s,%s, %s,%s)"
+		mycursor.execute(sql, res)
+	else: #if stock price values length is 4 then only 1 value is added
+		mycursor.execute("select * from portfolio where Date=%s",datelist[i-1])
+		res = []
+		inventment = {}
+		for c in mycursor.fetchall():
+			res.append(c)
+		for k, x in zip(L, res):
+			inventment[k] = x
+		res = (datelist[i],(int(inventment["A"]))+int(stockreturn[0]),(int(inventment["B"]))+int(stockreturn[1]),
+																	  (int(inventment["A"]))+int(stockreturn[2]),(int(inventment["A"]))+int(stockreturn[3]))
+
+		sql = "insert into  (Date,A,B,C,D) values (%s,%s,%s, %s,%s)" #inserting the new investment value for this date into database
+		mycursor.execute(sql,res)
+db.commit()
