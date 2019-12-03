@@ -1,0 +1,47 @@
+import mysql.connector
+import csv
+db = mysql.connector.connect(host="localhost",user="siri",passwd="")
+mycursor=db.cursor()
+L=["AAPL","BAC","DIS","FB","INTC","JNJ","JPM","MSFT","TSLA","V"]
+mycursor.execute("insert into portfolio Date,A,B,C,D values "2015-01-01","100","100","100","100")
+for i in L:
+	with open(i+".csv",newline='') as csvfile:
+		data = csv.reader(csvfile)
+		for row in data:
+			date,stock_price=str(row).split('|')
+			sql="insert into gridlex (Date, %s) values (%s, %s))"
+			val = (i,date,stock_price)
+			mycursor.execute(sql,val)
+mycursor.execute("alter table gridlex order by Date ASC;")
+db.commit()
+mycursor.execute("select Date from gridlex")
+datelist=[]
+for row in mycursor:
+	datelist.append(row)
+den={}
+num={}
+inventment={}
+for i in range(2,len(datelist)):
+	mycursor.execute("select * from gridlex where Date=%s",datelist[i-1])
+	den[row[0]]=row[1] for row in mycursor.fetchall()
+	mycursor.execute("select * from gridlex where Date=%s",datelist[i])
+	num[row[0]]=row[1] for row in mycursor.fetchall()
+	stockreturn=[]
+	for j in L:
+		if den[j] and num[j]:
+			returns=(num[j]-den[j])/den[j]
+			#stockreturn.append({i:returns})
+			stockreturn.append(returns)
+	#stockreturn=sorted(stockreturn,key=lambda kv:kv['returns'])
+	stockreturn.sort()
+	if len(stockreturn)>7:
+		pass
+	else:
+		mycursor.execute("select * from portfolio where Date=%s",datelist[i-1])
+		inventment[row[0]]=row[1] for row in mycursor.fetchall()
+		res=(inventment[i],(int(inventment["A"])+int(stockreturn[0]),(int(inventment["B"])+int(stockreturn[1]),(int(inventment["A"])+int(stockreturn[2]),(int(inventment["A"])+int(stockreturn[3]))
+		mycursor.execute("insert into portfolio Date,A,B,C,D values (%s, %s,%s, %s,%s)",res)
+		
+		
+		
+	
